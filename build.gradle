@@ -1,6 +1,9 @@
 plugins {
 	id 'org.springframework.boot' version '2.1.4.RELEASE'
 	id 'java'
+    id 'findbugs'
+    id 'checkstyle'
+    id 'jacoco'
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -21,4 +24,25 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+
+	//checkstyle 'com.puppycrawl.tools:checkstyle:6.11.2'
+    //findbugs 'com.google.code.findbugs:findbugs:3.0.1'
+}
+
+checkstyleMain {
+    configFile = file('./config/checkstyle/sun_checks.xml')
+    ignoreFailures = true
+}
+
+checkstyleTest {
+    configFile = file('./config/checkstyle/sun_checks.xml')
+    excludes = ['**/*']
+}
+
+findbugsMain {
+    ignoreFailures = true
+}
+
+findbugsTest {
+    ignoreFailures = true
 }
