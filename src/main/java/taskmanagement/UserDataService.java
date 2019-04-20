@@ -8,22 +8,26 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserDataService{
-	@PersistenceContext
-	private EntityManager entityManager;
+public class UserDataService {
+  @PersistenceContext
+  private EntityManager entityManager;
 
-	@SuppressWarnings("unchecked")
-	public List<UserData> getAll() {
-		return (List<UserData>) entityManager.createQuery("from UserData").getResultList();
-	}
+  @SuppressWarnings("unchecked")
+  public List<UserData> getAll() {
+    return (List<UserData>) entityManager.createQuery("from UserData").getResultList();
+  }
 
-	@SuppressWarnings("unchecked")
-	public List<UserData> login(String loginID, String password) {
-		return (List<UserData>) entityManager.createQuery("from UserData where loginID = '" + loginID + "' and password = '" + password + "'").getResultList();
-	}
+  @SuppressWarnings("unchecked")
+  public List<UserData> login(String loginId, String password) {
+    return (List<UserData>) entityManager
+        .createQuery(
+            "from UserData where loginId = '" + loginId + "' and password = '" + password + "'")
+        .getResultList();
+  }
 
-	public UserData findByUserNo(long userNo) {
-		return (UserData) entityManager.createQuery("from UserData where userNo = " + userNo).getSingleResult();
-	}
+  public UserData findByUserNo(long userNo) {
+    return (UserData) entityManager.createQuery("from UserData where userNo = " + userNo)
+        .getSingleResult();
+  }
 
 }

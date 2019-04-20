@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8">
-  <title>タスク管理システム ログイン</title>
-  <link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"></link>
+<meta charset="utf-8">
+<title>タスク管理システム ログイン</title>
+<link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"></link>
 </head>
 
 <body>
-  <h3>ログイン</h3>
-  <div th:text="${message}" class="err"></div>
-  <br>
-  <form action="/login" method="post">
-    ログインID　<input type="text" name="loginID" value="" placeholder="メールアドレス	">
-    <br><br>
-    パスワード　<input type="text" name="password" value="" placeholder="パスワード">
-    <br><br>
-    <input type="submit" name="search" value="ログイン" class="square_btn">
-  </form>
+	<h3>ログイン</h3>
+	<div th:text="${message}" class="err"></div>
+	<br>
+	<form action="/login" method="post">
+		ログインID <input type="text" name="loginId" value=""
+			placeholder="メールアドレス	"> <br>
+		<br> パスワード <input type="text" name="password" value=""
+			placeholder="パスワード"> <br>
+		<br> <input type="submit" name="search" value="ログイン"
+			class="square_btn">
+	</form>
 
 </body>
 </html>

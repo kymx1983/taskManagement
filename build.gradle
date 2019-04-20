@@ -25,8 +25,8 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 
-	//checkstyle 'com.puppycrawl.tools:checkstyle:6.11.2'
-    //findbugs 'com.google.code.findbugs:findbugs:3.0.1'
+	checkstyle 'com.puppycrawl.tools:checkstyle:6.11.2'
+    findbugs 'com.google.code.findbugs:findbugs:3.0.1'
 }
 
 checkstyleMain {

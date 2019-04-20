@@ -19,139 +19,136 @@ import util.TaskUtil;
 @RestController
 public class SelectTask {
 
-    @Autowired
-    TaskDataRepository repository;
+  @Autowired
+  TaskDataRepository repository;
 
-    @Autowired
-    private TaskDataService service;
+  @Autowired
+  private TaskDataService service;
 
-    @Autowired
-    private UserDataService userService;
+  @Autowired
+  private UserDataService userService;
 
-    @Autowired
-    private TaskDataService taskService;
+  @Autowired
+  private TaskDataService taskService;
 
-    @RequestMapping(value="/select" , method = RequestMethod.POST)
-    public ModelAndView select(
-            @RequestParam String searchDate,
-            @RequestParam String searchText,
-            @RequestParam(value="statusConditions", required=false) String[] statusConditions,
-            ModelAndView mav) {
+  @RequestMapping(value = "/select", method = RequestMethod.POST)
+  public ModelAndView select(
+      @RequestParam String searchDate,
+      @RequestParam String searchText,
+      @RequestParam(value = "statusConditions", required = false) String[] statusConditions,
+      ModelAndView mav) {
 
-        mav.setViewName("selectTask.html");
+    mav.setViewName("selectTask.html");
 
-        mav.addObject("searchDate", TaskUtil.getToday());
+    mav.addObject("searchDate", TaskUtil.getToday());
 
-        System.out.println("searchDate" + searchDate);
+    System.out.println("searchDate" + searchDate);
 
-        String status = "";
-        if(statusConditions != null) {
-            for(String value : statusConditions) {
-                if(status.length() > 0) {
-                    status += ",";
-                }
-                status += value;
-            }
-
+    String status = "";
+    if (statusConditions != null) {
+      for (String value : statusConditions) {
+        if (status.length() > 0) {
+          status += ",";
         }
-
-        System.out.println("ステータス:" + status);
-
-        List<TaskData> list = service.searchTask(searchDate, searchText, status);
-        mav.addObject("datalist", list);
-
-        return mav;
-    }
-
-    @RequestMapping(value="/edit" , method = RequestMethod.POST)
-    public ModelAndView editTask(@RequestParam long taskNo, ModelAndView mav) {
-
-        mav = getInsertTaskView(taskNo);
-        mav.addObject("obj", getTaskData(taskNo) );
-
-        return mav;
+        status += value;
+      }
 
     }
 
-    @RequestMapping(value="/flush" , method = RequestMethod.POST)
-    @Transactional(readOnly=false)
-    public ModelAndView flush(
-            @ModelAttribute("obj") @Validated TaskData taskData,
-            BindingResult result,
-            @RequestParam String mode)
-        {
+    System.out.println("ステータス:" + status);
 
-        if(result.hasErrors()) {
-            ModelAndView mav = getInsertTaskView(taskData.getTaskNo());
-            mav.addObject("message", "入力内容に誤りがあります");
-            mav.addObject("obj", taskData);
-            return mav;
+    List<TaskData> list = service.searchTask(searchDate, searchText, status);
+    mav.addObject("datalist", list);
 
-        }
+    return mav;
+  }
 
-        switch(mode) {
-        case "insert":
-        case "update":
-            repository.saveAndFlush(taskData);
-            break;
-        case "copy":
-            taskData.setTaskNo(0);
-            repository.saveAndFlush(taskData);
-            break;
-        case "delete":
-            repository.delete(taskData);
-            break;
-        }
+  @RequestMapping(value = "/edit", method = RequestMethod.POST)
+  public ModelAndView editTask(@RequestParam long taskNo, ModelAndView mav) {
 
-        // ログイン成功
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("SelectTask.html");
-        mav.addObject("searchDate", TaskUtil.getToday());
-        List<TaskData> list = taskService.getAll();
-        mav.addObject("datalist", list);
+    mav = getInsertTaskView(taskNo);
+    mav.addObject("obj", getTaskData(taskNo));
 
-        List<UserData> user = userService.getAll();
-        mav.addObject("userList", user);
+    return mav;
 
-        return mav;
-    }
+  }
 
-    public ModelAndView getInsertTaskView(long taskNo) {
+  @RequestMapping(value = "/flush", method = RequestMethod.POST)
+  @Transactional(readOnly = false)
+  public ModelAndView flush(
+      @ModelAttribute("obj") @Validated TaskData taskData,
+      BindingResult result,
+      @RequestParam String mode) {
 
-        ModelAndView mav = new ModelAndView();
-
-        mav.setViewName("InsertTask.html");
-
-        // ステータスのラジオボタンに表示する内容を設定する
-        mav.addObject("statusItem", StatusItem.getStatusItem());
-
-        boolean modeVisible = false;
-        if (taskNo != 0) {
-            modeVisible = true;
-        } else {
-        }
-        mav.addObject("modeVisible", modeVisible);
-
-        return mav;
+    if (result.hasErrors()) {
+      ModelAndView mav = getInsertTaskView(taskData.getTaskNo());
+      mav.addObject("message", "入力内容に誤りがあります");
+      mav.addObject("obj", taskData);
+      return mav;
 
     }
-
-    private TaskData getTaskData(long taskNo) {
-        TaskData data = new TaskData();
-        if (taskNo != 0) {
-            data = service.findByTaskNo(taskNo);
-        } else {
-            // 新規作成の場合
-            // 日付項目に今日日付を設定する
-            String today = TaskUtil.getToday();
-            data.setPlanFrom(today);
-            data.setPlanTo(today);
-            data.setDue(today);
-
-            // ステータスを未着手にする
-            data.setStatusCD(1);
-        }
-        return data;
+    switch (mode) {
+    case "insert":
+    case "update":
+      repository.saveAndFlush(taskData);
+      break;
+    case "copy":
+      taskData.setTaskNo(0);
+      repository.saveAndFlush(taskData);
+      break;
+    case "delete":
+      repository.delete(taskData);
+      break;
     }
+
+    // ログイン成功
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("SelectTask.html");
+    mav.addObject("searchDate", TaskUtil.getToday());
+    List<TaskData> list = taskService.getAll();
+    mav.addObject("datalist", list);
+
+    List<UserData> user = userService.getAll();
+    mav.addObject("userList", user);
+
+    return mav;
+  }
+
+  public ModelAndView getInsertTaskView(long taskNo) {
+
+    ModelAndView mav = new ModelAndView();
+
+    mav.setViewName("InsertTask.html");
+
+    // ステータスのラジオボタンに表示する内容を設定する
+    mav.addObject("statusItem", StatusItem.getStatusItem());
+
+    boolean modeVisible = false;
+    if (taskNo != 0) {
+      modeVisible = true;
+    }
+    mav.addObject("modeVisible", modeVisible);
+
+    return mav;
+
+  }
+
+  private TaskData getTaskData(long taskNo) {
+    TaskData data = new TaskData();
+    if (taskNo != 0) {
+      data = service.findByTaskNo(taskNo);
+    } else {
+      // 新規作成の場合
+      // 日付項目に今日日付を設定する
+      String today = TaskUtil.getToday();
+      data.setPlanFrom(today);
+      data.setPlanTo(today);
+      data.setDue(today);
+
+      // ステータスを未着手にする
+      data.setStatusCd(1);
+    }
+    return data;
+  }
 
 }
