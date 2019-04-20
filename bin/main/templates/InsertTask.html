@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>タスク管理システム</title>
+  <link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"></link>
+</head>
+
+  <h3>検索条件</h3>
+  <div class="container">
+
+    <form action="/flush" method="post" th:object="${obj}">
+    	<div th:text="${message}" class="err"></div>
+    	<br>
+      <input type="hidden" name="TaskCD" value="">
+      <table class="formTable">
+        <tr>
+          <th class="formTH">プロジェクト</th>
+          <td class="formTD">
+          	 <input type="hidden" name="taskNo" th:value="*{TaskNo}">
+          	<input type="hidden" name="userCD" value="1">
+            <input type="text" width=1000px class="formText" name="ProjectCD" th:value="*{ProjectCD}" placeholder="プロジェクトを入力">
+            <div th:if="${#fields.hasErrors('projectCD')}" th:errors="*{projectCD}" th:errorclass="err"></div>
+          </td>
+        </tr>
+        <tr>
+          <th class="formTH">タスク</th>
+          <td class="formTD">
+            <input type="text" class="formText" name="Task" th:value="*{Task}" placeholder="タスクを入力">
+            <div th:if="${#fields.hasErrors('task')}" th:errors="*{task}" th:errorclass="err"></div>
+          </td>
+        </tr>
+        <tr>
+          <th class="formTH">詳細</th>
+          <td class="formTD"><textarea class="formTextArea" name="TaskDetails"  th:field="*{TaskDetails}" placeholder="タスクの詳細を入力(改行可能）"></textarea></td>
+        </tr>
+        <tr>
+          <th class="formTH">開始日</th>
+          <td class="formTD">
+            <input type="date" class="formTextDate" name="PlanFrom" th:value="*{PlanFrom}">　～　
+            <input type="date" class="formTextDate" name="PlanTo" th:value="*{PlanTo}">
+          </td>
+        </tr>
+        <tr>
+          <th class="formTH">ステータス</th>
+          <td>
+            <div th:each="item : ${statusItem}">
+            	<label><input type="radio" name="StatusCD" th:value="${item.key}" th:text="${item.value}" th:field="*{StatusCD}" ></label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th class="formTH">期限</th>
+          <td class="formTD"><input type="date" class="formTextDate" name="Due" th:value="*{Due}"></td>
+        </tr>
+      </table>
+      <div th:if="${modeVisible}">
+			<br>モード
+			<input type="radio" name="mode" value="update" checked="checked">更新
+			<input type="radio" name="mode" value="copy">コピーして新規登録
+			<input type="radio" name="mode" value="delete">削除
+      </div>
+      <div th:if="${!modeVisible}">
+	      	<input type="hidden" name="mode" value="insert">
+      </div>
+
+
+      <br><br>
+      <input type="submit" name="execute" class="square_btn" value="実行">　<input type="submit" name="cancel" class="square_btn" value="キャンセル">
+    </form>
+
+  </div>
+</body>
+</html>

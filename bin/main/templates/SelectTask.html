@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>タスク管理システム</title>
+  <link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"></link>
+</head>
+
+<body>
+  <h3>検索条件</h3>
+  <form action="/select" method="post">
+    日付　<input type="date" name="searchDate" th:value="${searchDate}">
+    <br><br>
+    文字列 <input type="text" name="searchText" value="" placeholder="検索文字を入力">
+    <br><br>
+    ステータス　
+    <label><input type="checkbox" name="statusConditions" value="1" checked> 未着手</label>　
+    <label><input type="checkbox" name="statusConditions" value="2" th:checked="true"> 対応中</label>　
+    <label><input type="checkbox" name="statusConditions" value="3" th:checked="true"> 保留</label>　
+    <label><input type="checkbox" name="statusConditions" value="4" checked> 取消</label>　
+    <label><input type="checkbox" name="statusConditions" value="5" checked> 完了</label>　
+    <br><br>
+    <input type="submit" name="search" value="検索" class="square_btn">
+  </form>
+  <hr>
+
+    <h3>タスク一覧</h3>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>プロジェクト</th>
+            <th>タスク</th>
+            <th>開始日</th>
+            <th>終了日</th>
+            <th>ステータス</th>
+            <th>期限</th>
+            <th></th>
+        </tr>
+        <tr th:each="obj : ${datalist}">
+            <form action="/edit" method="post">
+                <input type="hidden" name="taskNo" th:value="${obj.taskNo}">
+              <td th:text="${obj.taskNo}"></td>
+              <td th:text="${obj.projectCD}"></td>
+              <td th:text="${obj.task}"></td>
+              <td th:text="${obj.planFrom}"></td>
+              <td th:text="${obj.planTo}"></td>
+              <td th:text="${obj.StatusCD}"></td>
+              <td th:text="${obj.due}"></td>
+              <td><input type="submit" name="details" value="詳細" class="square_btn" ></td>
+            </form>
+        </tr>
+    </table>
+  <br>
+  <form action="/edit" method="post">
+      <input type="hidden" name="taskNo" th:value="0">
+    <input type="submit" name="new" value="タスクを新規登録" class="square_btn" >
+  </form>
+  <br>
+</body>
+</html>
