@@ -10,19 +10,16 @@
 	<h3>検索条件</h3>
 	<form action="/select" method="post">
 		日付 <input type="date" name="searchDate" th:value="${searchDate}">
-		<br>
-		<br> 文字列 <input type="text" name="searchText" value=""
-			placeholder="検索文字を入力"> <br>
-		<br> ステータス <label><input type="checkbox"
-			name="statusConditions" value="1" checked> 未着手</label> <label><input
-			type="checkbox" name="statusConditions" value="2" th:checked="true">
-			対応中</label> <label><input type="checkbox" name="statusConditions"
-			value="3" th:checked="true"> 保留</label> <label><input
-			type="checkbox" name="statusConditions" value="4" checked> 取消</label>
-		<label><input type="checkbox" name="statusConditions"
-			value="5" checked> 完了</label> <br>
-		<br> <input type="submit" name="search" value="検索"
-			class="square_btn">
+		<br> <br> 文字列 <input type="text" name="searchText" value=""
+			placeholder="検索文字を入力"> <br> <br> ステータス <label><input
+			type="checkbox" name="statusConditions" value="1" checked>
+			未着手</label> <label><input type="checkbox" name="statusConditions"
+			value="2" th:checked="true"> 対応中</label> <label><input
+			type="checkbox" name="statusConditions" value="3" th:checked="true">
+			保留</label> <label><input type="checkbox" name="statusConditions"
+			value="4" checked> 取消</label> <label><input type="checkbox"
+			name="statusConditions" value="5" checked> 完了</label> <br> <br>
+		<input type="submit" name="search" value="検索" class="square_btn">
 	</form>
 	<hr>
 

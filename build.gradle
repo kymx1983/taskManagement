@@ -29,13 +29,6 @@ dependencies {
     findbugs 'com.google.code.findbugs:findbugs:3.0.1'
 }
 
-// def checkstyleVersion = '8.10.1'
-// checkstyle {
-//     configFile = file('./config/checkstyle/sun_checks.xml')
-//     toolVersion = checkstyleVersion
-//     ignoreFailures = false
-// }
-
 checkstyleMain {
     configFile = file('./config/checkstyle/google_checks.xml')
     ignoreFailures = true

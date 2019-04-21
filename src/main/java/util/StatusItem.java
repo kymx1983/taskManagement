@@ -4,6 +4,11 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class StatusItem {
+
+  /**
+   * ステータスリストを取得する.
+   * @return
+   */
   public static Map<String, String> getStatusItem() {
     Map<String, String> statusItem = new LinkedHashMap<String, String>();
     statusItem.put("0", "未着手");

@@ -31,6 +31,11 @@ public class Login {
   @Autowired
   private TaskDataService taskService;
 
+  /**
+   * ログイン画面に遷移する.
+   * @param mav ModelAndViewインスタンス
+   * @return
+   */
   @RequestMapping(value = "/", method = RequestMethod.GET)
   public ModelAndView index(ModelAndView mav) {
     mav.setViewName("login.html");
@@ -38,6 +43,13 @@ public class Login {
     return mav;
   }
 
+  /**
+   * ログイン機能.
+   * @param loginId 画面から入力されたログインID
+   * @param password 画面から入力されたパスワード
+   * @param mav 画面入力内容
+   * @return
+   */
   @RequestMapping(value = "/login", method = RequestMethod.POST)
   public ModelAndView login(@RequestParam String loginId, @RequestParam String password,
       ModelAndView mav) {
@@ -62,6 +74,9 @@ public class Login {
     return mav;
   }
 
+  /**
+   * 初期処理を実装する.
+   */
   @PostConstruct
   public void init() {
     //ユーザデータ

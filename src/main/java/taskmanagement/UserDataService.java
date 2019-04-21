@@ -17,6 +17,12 @@ public class UserDataService {
     return (List<UserData>) entityManager.createQuery("from UserData").getResultList();
   }
 
+  /**
+   * ログイン処理.
+   * @param loginId ログインID
+   * @param password  パスワード
+   * @return
+   */
   @SuppressWarnings("unchecked")
   public List<UserData> login(String loginId, String password) {
     return (List<UserData>) entityManager

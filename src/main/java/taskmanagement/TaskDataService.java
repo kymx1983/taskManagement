@@ -23,6 +23,13 @@ public class TaskDataService {
         .getSingleResult();
   }
 
+  /**
+   * タスク情報を検索する.
+   * @param searchDate  検索日
+   * @param searchText  検索テキスト
+   * @param inStatus  検索ステータス
+   * @return
+   */
   @SuppressWarnings("unchecked")
   public List<TaskData> searchTask(String searchDate, String searchText, String inStatus) {
     String strSql = "";
