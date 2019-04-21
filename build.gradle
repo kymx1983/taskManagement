@@ -30,12 +30,12 @@ dependencies {
 }
 
 checkstyleMain {
-    configFile = file('./config/checkstyle/sun_checks.xml')
+    configFile = file('./config/checkstyle/google_checks.xml')
     ignoreFailures = true
 }
 
 checkstyleTest {
-    configFile = file('./config/checkstyle/sun_checks.xml')
+    configFile = file('./config/checkstyle/google_checks.xml')
     excludes = ['**/*']
 }
 
