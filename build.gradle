@@ -25,9 +25,16 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 
-	checkstyle 'com.puppycrawl.tools:checkstyle:6.11.2'
+	checkstyle 'com.puppycrawl.tools:checkstyle:8.18'
     findbugs 'com.google.code.findbugs:findbugs:3.0.1'
 }
+
+// def checkstyleVersion = '8.10.1'
+// checkstyle {
+//     configFile = file('./config/checkstyle/sun_checks.xml')
+//     toolVersion = checkstyleVersion
+//     ignoreFailures = false
+// }
 
 checkstyleMain {
     configFile = file('./config/checkstyle/google_checks.xml')
