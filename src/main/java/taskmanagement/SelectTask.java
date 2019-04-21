@@ -110,17 +110,19 @@ public class SelectTask {
     }
 
     switch (mode) {
-    case "insert":
-    case "update":
-      repository.saveAndFlush(taskData);
-      break;
-    case "copy":
-      taskData.setTaskNo(0);
-      repository.saveAndFlush(taskData);
-      break;
-    case "delete":
-      repository.delete(taskData);
-      break;
+      case "insert":
+      case "update":
+        repository.saveAndFlush(taskData);
+        break;
+      case "copy":
+        taskData.setTaskNo(0);
+        repository.saveAndFlush(taskData);
+        break;
+      case "delete":
+        repository.delete(taskData);
+        break;
+      default:
+        break;
     }
 
     // ログイン成功
