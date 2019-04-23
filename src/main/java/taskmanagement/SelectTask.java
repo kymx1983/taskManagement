@@ -52,20 +52,17 @@ public class SelectTask {
 
     System.out.println("searchDate" + searchDate);
 
-    String status = "";
+    StringBuffer status = new StringBuffer();
     if (statusConditions != null) {
       for (String value : statusConditions) {
         if (status.length() > 0) {
-          status += ",";
+          status.append(",");
         }
-        status += value;
+        status.append(value);
       }
-
     }
 
-    System.out.println("ステータス:" + status);
-
-    List<TaskData> list = service.searchTask(searchDate, searchText, status);
+    List<TaskData> list = service.searchTask(searchDate, searchText, status.toString());
     mav.addObject("datalist", list);
 
     return mav;
