@@ -39,8 +39,6 @@ public class TaskDataService {
     if (!searchText.equals("")) {
       strSql += " AND (task like '%" + searchText + "%' or taskDetails like '%" + searchText
           + "%')";
-    }else {
-
     }
 
     strSql += " AND planFrom <= '" + searchDate + "' AND planTo >= '" + searchDate + "'";
