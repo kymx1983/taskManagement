@@ -99,9 +99,9 @@ public class Login {
     data1.setTask("ドメインを解約する");
     data1.setTaskDetails("詳細をここに記載");
     data1.setUserNo(1);
-    data1.setPlanFrom("2019-01-01");
-    data1.setPlanTo("2019-03-01");
-    data1.setDue("2019-02-28");
+    data1.setPlanFrom("2019-04-01");
+    data1.setPlanTo("2019-04-01");
+    data1.setDue("2019-04-28");
     data1.setStatusCd(1);
     // data1.setStatusdata(statusData1);
     taskRepository.saveAndFlush(data1);
