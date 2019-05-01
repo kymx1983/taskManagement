@@ -10,41 +10,41 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "taskData")
+@Table(name = "taskdata")
 public class TaskData {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column
+  @Column(name = "taskno")
   @NotNull
   private long taskNo;
 
-  @Column(nullable = false)
+  @Column(name = "projectcd",nullable = false)
   @NotEmpty(message = "プロジェクトを入力してください")
   private String projectCd;
 
-  @Column(nullable = false)
+  @Column(name = "task",nullable = false)
   @NotEmpty(message = "タスクを入力してください")
   private String task;
 
-  @Column(nullable = false)
+  @Column(name = "taskdetails",nullable = false)
   private String taskDetails;
 
-  @Column(nullable = false)
+  @Column(name = "userno",nullable = false)
   // @NotEmpty
   private long userNo;
 
-  @Column(nullable = false)
+  @Column(name = "planfrom",nullable = false)
   @NotEmpty(message = "開始日を指定してください")
   private String planFrom;
 
-  @Column
+  @Column(name = "planto")
   @NotEmpty(message = "終了日を指定してください")
   private String planTo;
 
-  @Column
+  @Column(name = "statuscd")
   private int statusCd;
 
-  @Column
+  @Column(name = "due")
   private String due;
 
   public long getTaskNo() {

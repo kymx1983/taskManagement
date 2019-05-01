@@ -10,23 +10,23 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "UserData")
+@Table(name = "userdata")
 public class UserData {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column
+  @Column(name="userno")
   @NotNull
   private long userNo;
 
-  @Column(nullable = false)
+  @Column(name="loginid",nullable = false)
   @NotEmpty(message = "ログインIDを入力してください")
   private String loginId;
 
-  @Column(nullable = false)
+  @Column(name="password",nullable = false)
   @NotEmpty(message = "パスワードを入力してください")
   private String password;
 
-  @Column(nullable = false)
+  @Column(name="username",nullable = false)
   @NotEmpty(message = "ユーザ名を入力してください")
   private String userName;
 
