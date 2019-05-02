@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -47,6 +48,10 @@ public class TaskData {
   @Column(name = "due")
   private String due;
 
+  @ManyToOne()
+//  @Column(name = "kaetemite")
+  private StatusData statusData;
+
   public long getTaskNo() {
     return taskNo;
   }
@@ -68,7 +73,7 @@ public class TaskData {
   }
 
   public void setTask(String task) {
-    this.task = task;
+    this.task = task;a
   }
 
   public String getTaskDetails() {
@@ -118,4 +123,13 @@ public class TaskData {
   public void setDue(String due) {
     this.due = due;
   }
+
+  public StatusData getStatusData() {
+    return statusData;
+  }
+
+  public void setStatusData(StatusData statusData) {
+    this.statusData = statusData;
+  }
+
 }

@@ -14,19 +14,19 @@ import javax.validation.constraints.NotNull;
 public class UserData {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name="userno")
+  @Column(name = "userno")
   @NotNull
   private long userNo;
 
-  @Column(name="loginid",nullable = false)
+  @Column(name = "loginid",nullable = false)
   @NotEmpty(message = "ログインIDを入力してください")
   private String loginId;
 
-  @Column(name="password",nullable = false)
+  @Column(name = "password",nullable = false)
   @NotEmpty(message = "パスワードを入力してください")
   private String password;
 
-  @Column(name="username",nullable = false)
+  @Column(name = "username",nullable = false)
   @NotEmpty(message = "ユーザ名を入力してください")
   private String userName;
 
