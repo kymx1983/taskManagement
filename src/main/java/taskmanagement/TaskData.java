@@ -73,7 +73,7 @@ public class TaskData {
   }
 
   public void setTask(String task) {
-    this.task = task;a
+    this.task = task;
   }
 
   public String getTaskDetails() {
