@@ -42,9 +42,6 @@ public class TaskData {
   @NotEmpty(message = "終了日を指定してください")
   private String planTo;
 
-  @Column(name = "statuscd")
-  private int statusCd;
-
   @Column(name = "due")
   private String due;
 
@@ -105,14 +102,6 @@ public class TaskData {
 
   public void setPlanTo(String planTo) {
     this.planTo = planTo;
-  }
-
-  public int getStatusCd() {
-    return statusCd;
-  }
-
-  public void setStatusCd(int statusCd) {
-    this.statusCd = statusCd;
   }
 
   public String getDue() {

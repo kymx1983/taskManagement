@@ -176,11 +176,15 @@ public class SelectTask {
       data.setDue(today);
 
       // ステータスを未着手にする
-      data.setStatusCd(1);
+//      data.getStatusData().setStatusCd(0);
     }
     return data;
   }
 
+  /**
+   * スタータスの一覧を表示する.
+   * @return
+   */
   public Map<String, String> getStatusItem() {
     Map<String, String> statusItem = new LinkedHashMap<String, String>();
 

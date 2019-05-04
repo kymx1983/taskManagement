@@ -34,7 +34,7 @@ public class TaskDataService {
   public List<TaskData> searchTask(String searchDate, String searchText, String inStatus) {
     String strSql = "";
     strSql += "from TaskData where ";
-    strSql += "statusCd in (" + inStatus + ")";
+    strSql += "status_data_statuscd in (" + inStatus + ")";
 
     if (!searchText.equals("")) {
       strSql += " AND (task like '%" + searchText + "%' or taskDetails like '%" + searchText

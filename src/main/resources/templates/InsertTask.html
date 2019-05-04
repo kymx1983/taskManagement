@@ -48,7 +48,7 @@
 					<div th:each="item : ${statusItem}">
 						<label><input type="radio" name="StatusCd"
 							th:value="${item.key}" th:text="${item.value}"
-							th:field="*{StatusCd}"></label>
+							th:field="*{statusData.statusCd}"></label>
 					</div>
 				</td>
 			</tr>
