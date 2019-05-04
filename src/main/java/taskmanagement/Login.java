@@ -22,8 +22,8 @@ public class Login {
   // @Autowired
   // StatusDataRepository statusRepository;
 
-  @Autowired
-  TaskDataRepository taskRepository;
+//  @Autowired
+//  TaskDataRepository taskRepository;
 
   @Autowired
   private UserDataService userService;

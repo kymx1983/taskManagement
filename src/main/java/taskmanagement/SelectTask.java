@@ -1,6 +1,8 @@
 package taskmanagement;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import util.StatusItem;
 import util.TaskUtil;
 
 @RestController
@@ -30,6 +31,9 @@ public class SelectTask {
 
   @Autowired
   private TaskDataService taskService;
+
+  @Autowired
+  private StatusDataService statusService;
 
   /**
    * 検索処理.
@@ -147,7 +151,7 @@ public class SelectTask {
     mav.setViewName("InsertTask.html");
 
     // ステータスのラジオボタンに表示する内容を設定する
-    mav.addObject("statusItem", StatusItem.getStatusItem());
+    mav.addObject("statusItem", getStatusItem());
 
     boolean modeVisible = false;
     if (taskNo != 0) {
@@ -175,6 +179,19 @@ public class SelectTask {
       data.setStatusCd(1);
     }
     return data;
+  }
+
+  public Map<String, String> getStatusItem() {
+    Map<String, String> statusItem = new LinkedHashMap<String, String>();
+
+    List<StatusData> list = statusService.getAll();
+
+    for (StatusData data : list) {
+      String statusCd = String.valueOf(data.getStatusCd());
+      String statusName = data.getStatusName();
+      statusItem.put(statusCd,statusName);
+    }
+    return statusItem;
   }
 
 }

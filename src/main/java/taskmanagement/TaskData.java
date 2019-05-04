@@ -49,7 +49,6 @@ public class TaskData {
   private String due;
 
   @ManyToOne()
-//  @Column(name = "kaetemite")
   private StatusData statusData;
 
   public long getTaskNo() {
