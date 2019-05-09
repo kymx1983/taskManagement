@@ -14,6 +14,6 @@ public class StatusDataService {
 
   @SuppressWarnings("unchecked")
   public List<StatusData> getAll() {
-    return (List<StatusData>) entityManager.createQuery("from StatusData").getResultList();
+    return (List<StatusData>) entityManager.createQuery("from StatusData order by statuscd").getResultList();
   }
 }
